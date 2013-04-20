@@ -182,10 +182,14 @@ class MainWindow(object):
 
         if (ctype == "Container"):
             if self.__notebook.get_current_page() == 1:
-                browse_model = BrowseModel(Container(path),
-                                           self.__sort_order)
-                self.__browse_path = path
-                self.__browse_view.set_model(browse_model)
+                try:
+                    browse_model = BrowseModel(Container(path),
+                                               self.__sort_order)
+                    self.__browse_path = path
+                    self.__browse_view.set_model(browse_model)
+                except Exception as error:
+                    print ("Failed to browse '%s': %s" % (name, error))
+
         elif url != "":
             if ctype == "Image":
                 self.__window.remove(self.__main_view)
